@@ -1,0 +1,72 @@
+---
+
+#####=== install ===#####
+
+# The installation state of fzf used by the system's package manager
+# choices: [ present, latest, absent ]
+install_state: present
+
+# Override this instead of install_state if you use that elsewhere
+# choices: [ present, latest, absent ]
+fzf_install_state: "{{ install_state }}"
+
+# Whether or not to use the system's package manager
+# default:
+#   - homebrew: true
+#   - pacman: true
+#   - all others: false
+fzf_use_pkg_mgr: "{{ fzf_default_use_pkg_mgr }}"
+
+# The name to be used by the system package manager to install fzf
+# default:
+#   - homebrew: fzf
+#   - pacman: fzf
+#   - all others: N/A
+fzf_package_name: "{{ fzf_default_package_name }}"
+
+# Note: This is ignored unless fzf_use_pkg_mgr is false
+fzf_install_prefix: "{{ fzf_default_install_prefix }}"
+
+#####=== configure ===#####
+
+# The state in which settings are written
+# choices: [ present, absent ]
+config_state: present
+
+# Override this instead of config_state if you use that elsewhere
+# choices: [ present, absent ]
+fzf_config_state: "{{ config_state }}"
+
+# Shell startup file where settings are written to.
+# default:
+#   - bash: ~/.bash_profile
+#   - zsh: ~/.zshrc
+#   - fish: ~/.config/fish/config.fish
+shell_config_file: "{{ default_shell_config_file }}"
+
+# Override this instead of shell_config_file if you use that elsewhere 
+# (or override shell_config_file if you want that to propogate here as well)
+fzf_shell_config_file: "{{ shell_config_file }}"
+
+fzf_config_block: "{{ fzf_default_config_block }}"
+
+# The marker line that surrounds fzf_config_block
+# "{mark}" will be replaced with "BEGIN" or "END".
+fzf_config_marker: "#####=== {mark} Ansible managed fzf settings ===#####"
+
+# fzf_vim_config_block: "{{ fzf_default_vim_config_block }}"
+
+#####=== XDG ===#####
+# http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+
+# The base directory relative to which user specific configuration files should be stored
+# default: $XDG_CONFIG_HOME | ~/.config/
+xdg_config_home: "{{ ansible_env.XDG_CONFIG_HOME | default(default_xdg_config_home) }}"
+
+# The base directory relative to which user specific data files should be stored
+# default: $XDG_DATA_HOME | ~/.local/share/
+xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(default_xdg_data_home) }}"
+
+# The base directory relative to which user specific non-essential data files should be stored
+# default: $XDG_CACHE_HOME | ~/.cache
+xdg_cache_home: "{{ ansible_env.XDG_CACHE_HOME | default(default_xdg_cache_home) }}"

@@ -1,0 +1,52 @@
+---
+    # - "{{ ansible_distribution }}.yml"
+- name: setup
+  include_vars: "{{ item }}"
+  with_items:
+    - "{{ ansible_pkg_mgr | default('default') }}.yml"
+    - "{{ ansible_user_shell | basename }}.yml"
+  tags: always
+
+#####=== install ===#####
+
+- block:
+    - name: install | git
+      git: 
+        repo: "{{ fzf_git_clone_url }}"
+        dest: "{{ fzf_install_prefix }}"
+        update: yes
+
+    - name: install | unarchive
+      unarchive:
+        src: "{{ fzf_tarball_binary_url }}"
+        dest: "{{ fzf_install_prefix }}/bin/fzf"
+  when: fzf_use_pkg_mgr == false
+  tags:
+    - bootstrap
+    - install
+
+- name: install | package
+  package: 
+    name: "{{ fzf_package_name }}"
+    state: "{{ fzf_install_state }}"
+  become: "{{ ansible_pkg_mgr != 'homebrew' }}"
+  when: fzf_use_pkg_mgr == true
+  tags:
+    - bootstrap
+    - install
+
+#####=== configure ===#####
+
+- name: bash/zsh | configure | shell initialization
+  blockinfile:
+    dest: "{{ fzf_shell_config_file }}"
+    create: yes
+    backup: no
+    state: "{{ fzf_config_state }}"
+    marker: "{{ fzf_config_marker }}"
+    block: "{{ fzf_config_block }}"
+  when: ansible_user_shell | match(".*\/(bash|zsh)")
+  tags:
+    - bootstrap
+    - configure
+    - config

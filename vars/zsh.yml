@@ -1,0 +1,4 @@
+---
+
+default_shell_data_dir: "{{ xdg_data_home }}/zsh"
+default_shell_config_file: "{{ ansible_user_dir }}/.zshrc"

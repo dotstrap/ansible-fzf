@@ -1,0 +1,4 @@
+---
+
+default_shell_data_dir: "{{ ansible_user_dir }}/.config/fish"
+default_shell_config_file: "{{ default_data_dir }}/config.fish"

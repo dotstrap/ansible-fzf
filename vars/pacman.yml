@@ -1,0 +1,10 @@
+---
+fzf_default_install_prefix: "/usr"
+
+fzf_default_use_pkg_mgr: true
+
+fzf_default_package_name: "fzf"
+
+# [[ $- == *i* ]] && source "{{ fzf_install_prefix }}shell/completion.{{ ansible_user_shell | basename }}" 2> /dev/null
+fzf_default_config_block: |
+  source "{{ fzf_install_prefix }}/share/fzf/key-bindings.{{ ansible_user_shell | basename }}"
