@@ -15,5 +15,8 @@ galaxy_info:
         - all
         - any
   galaxy_tags:
+   - fzf
+   - shell
+   - dotstrap
 
 dependencies: []
