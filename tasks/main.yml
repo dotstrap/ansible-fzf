@@ -23,7 +23,9 @@
   when: fzf_use_pkg_mgr == false
   tags:
     - bootstrap
+    - bootstrap_fzf
     - install
+    - install_fzf
 
 - name: install | package
   package: 
@@ -33,7 +35,9 @@
   when: fzf_use_pkg_mgr == true
   tags:
     - bootstrap
+    - bootstrap_fzf
     - install
+    - install_fzf
 
 #####=== configure ===#####
 
@@ -48,5 +52,6 @@
   when: ansible_user_shell | match(".*\/(bash|zsh)")
   tags:
     - bootstrap
+    - bootstrap_fzf
     - configure
-    - config
+    - configure_fzf
