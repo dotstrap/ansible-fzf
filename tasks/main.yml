@@ -1,10 +1,14 @@
 ---
-    # - "{{ ansible_distribution }}.yml"
-- name: setup
-  include_vars: "{{ item }}"
-  with_items:
-    - "{{ ansible_pkg_mgr | default('default') }}.yml"
-    - "{{ ansible_user_shell | basename }}.yml"
+- block:
+    - name: setup
+      include_vars: "{{ item }}"
+      with_items:
+        - "{{ ansible_user_shell | basename }}.yml"
+        - "{{ ansible_pkg_mgr }}.yml"
+  rescue:
+      # only include default when there isn't an "{{ ansible_pkg_mgr }}.yml"
+    - name: setup
+      include_vars: "default.yml"
   tags: always
 
 #####=== install ===#####
