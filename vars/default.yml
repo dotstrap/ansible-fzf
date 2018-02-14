@@ -1,5 +1,5 @@
 ---
-fzf_default_install_prefix: "{{ xdg_data_home }}/fzf"
+fzf_default_install_prefix: "/usr/local"
 
 fzf_default_use_pkg_mgr: false
 
@@ -11,7 +11,7 @@ fzf_default_config_block: |
   if [[ ! "$MANPATH" == *"{{ fzf_install_prefix }}"man* && -d "{{ fzf_install_prefix }}man" ]]; then
     export MANPATH="$MANPATH:"{{ fzf_install_prefix }}"man"
   fi
-  
+
   [[ $- == *i* ]] && source "{{ fzf_install_prefix }}/shell/completion.{{ ansible_user_shell | basename }}" 2> /dev/null
 
   source "{{ fzf_install_prefix }}/shell/key-bindings.{{ ansible_user_shell | basename }}"
