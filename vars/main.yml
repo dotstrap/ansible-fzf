@@ -6,7 +6,7 @@ default_xdg_cache_home: "{{ ansible_user_dir }}/.cache"
 
 # CPU Architecture/instruction set type
 # choices: [ amd64, 386 ]
-fzf_architechture: "{{ (ansible_userspace_architecture == 'x86_64') | ternary('amd64', '386') }}"
+fzf_architecture: "{{ (ansible_userspace_architecture == 'x86_64') | ternary('amd64', '386') }}"
 
 fzf_os_family: "{{ ansible_os_family | lower }}"
 
