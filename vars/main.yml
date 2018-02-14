@@ -8,11 +8,11 @@ default_xdg_cache_home: "{{ ansible_user_dir }}/.cache"
 # choices: [ amd64, 386 ]
 fzf_architecture: "{{ (ansible_userspace_architecture == 'x86_64') | ternary('amd64', '386') }}"
 
-fzf_os_family: "{{ ansible_os_family | lower }}"
+fzf_os_system: "{{ ansible_system | lower }}"
 
 fzf_version: 0.17.3
 
-fzf_tarball_binary_url: "https://github.com/junegunn/fzf-bin/releases/download/{{ fzf_version }}/fzf-{{ fzf_version }}-{{ fzf_os_family }}_{{ fzf_architecture }}.tgz"
+fzf_tarball_binary_url: "https://github.com/junegunn/fzf-bin/releases/download/{{ fzf_version }}/fzf-{{ fzf_version }}-{{ fzf_os_system }}_{{ fzf_architecture }}.tgz"
 
 fzf_git_clone_url: "https://github.com/junegunn/fzf.git"
 
