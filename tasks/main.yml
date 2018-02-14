@@ -18,6 +18,7 @@
     src: "{{ fzf_tarball_binary_url }}"
     dest: "{{ fzf_install_prefix }}/bin"
     remote_src: yes
+  become: "{{ ansible_pkg_mgr != 'homebrew' }}"
   when: fzf_use_pkg_mgr == false
   tags:
     - bootstrap
