@@ -10,7 +10,7 @@ fzf_architechture: "{{ (ansible_userspace_architecture == 'x86_64') | ternary('a
 
 fzf_os_family: "{{ ansible_os_family | lower }}"
 
-fzf_version: 0.12.2
+fzf_version: 0.17.3
 
 fzf_tarball_binary_url: "https://github.com/junegunn/fzf-bin/releases/download/{{ fzf_version }}/fzf-{{ fzf_version }}-{{ fzf_os_family }}_{{ fzf_architecture }}.tgz"
 
