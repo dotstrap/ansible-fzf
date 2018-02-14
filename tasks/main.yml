@@ -17,6 +17,7 @@
   unarchive:
     src: "{{ fzf_tarball_binary_url }}"
     dest: "{{ fzf_install_prefix }}/bin/fzf"
+    remote_src: yes
   when: fzf_use_pkg_mgr == false
   tags:
     - bootstrap
